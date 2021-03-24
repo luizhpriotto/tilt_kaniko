@@ -1,8 +1,8 @@
 
 FROM node:9-alpine
-WORKDIR /var/www/app
 USER root
 RUN chmod 1777 /tmp
+WORKDIR /var/www/app
 ADD package.json .
 RUN npm install
 ADD . .
