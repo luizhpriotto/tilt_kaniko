@@ -7,7 +7,7 @@ custom_build(
   './kaniko.sh',
   # Docker context
   '.',
-  tag = 'main',
+  tag = '${tag}',
   live_update = [
     # Sync local files into the container.
     sync('.', '/var/www/app'),

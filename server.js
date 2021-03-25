@@ -18,7 +18,7 @@ app.get('/:key', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  return res.send('Hello world');
+  return res.send('Hello world1');
 });
 
 const PORT = process.env.PORT || 3000;
