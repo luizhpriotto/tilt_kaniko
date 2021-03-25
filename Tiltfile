@@ -1,10 +1,13 @@
 docker_compose('docker-compose.yml')
 
-docker_build(
+custom_build(
   # Image name - must match the image in the docker-compose file
-  'tilt.dev/express-redis-app',
+  'luizhpriotto/kaniko-demo:main',
+  #custom command
+  './kaniko.sh',
   # Docker context
   '.',
+  tag='main',
   live_update = [
     # Sync local files into the container.
     sync('.', '/var/www/app'),
@@ -13,5 +16,5 @@ docker_build(
     run('npm i', trigger='package.json'),
 
     # Restart the process to pick up the changed files.
-    restart_container()
+    #restart_container()
   ])
