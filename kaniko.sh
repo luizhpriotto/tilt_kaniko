@@ -13,13 +13,22 @@ kubectl run kaniko -n build \
         "args": [
           "--dockerfile=Dockerfile",
           "--context='"$(git config remote.origin.url | sed -r 's/https/git/g')"'",
-	  "--git=branch='"$(git rev-parse --abbrev-ref HEAD)"'",
+	        "--git=branch='"$(git rev-parse --abbrev-ref HEAD)"'",
+          "--cache-ttl=24h",
+	        "--cache-copy-layers",
+	        "--cache-dir=/cache",
           "--destination=luizhpriotto/kaniko-demo:'"$(git rev-parse --abbrev-ref HEAD)"'"
         ],
         "volumeMounts": [
           {
             "name": "docker-config",
             "mountPath": "/kaniko/.docker/"
+          },
+          {
+            "name": "cache",
+            "mountPath": "/cache",
+            "subPath": "cache",
+            "readOnly": false
           }
         ]
       }
@@ -41,6 +50,14 @@ kubectl run kaniko -n build \
                }
              }
            ]
+        }
+      },
+      {
+        "name": "cache",
+        "persistentVolumeClaim": {
+	         "claimName": "kaniko",
+           "persistentVolumeClaimId": "build:kaniko",
+           "readOnly": false
         }
       }
     ]
