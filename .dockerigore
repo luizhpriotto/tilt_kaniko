@@ -1,0 +1,6 @@
+.gitignore
+LICENSE
+README.md
+Tilt*
+docker-compose*
+*.sh
