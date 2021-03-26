@@ -17,7 +17,7 @@ kubectl run kaniko -n build \
           "--cache-ttl=24h",
 	        "--cache-copy-layers",
 	        "--cache-dir=/cache",
-          "--destination=luizhpriotto/kaniko-demo:'"$(git rev-parse --abbrev-ref HEAD)"'"
+          "--destination=luizhpriotto/kaniko-demo:'tilt-"$(git rev-parse --abbrev-ref HEAD)"'"
         ],
         "volumeMounts": [
           {
@@ -62,4 +62,5 @@ kubectl run kaniko -n build \
       }
     ]
   }
-}'
+}' \
+&& echo "fim do build, baixando imagem recém buildada $EXPECTED_REF" && docker pull $EXPECTED_REF
