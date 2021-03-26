@@ -1,4 +1,4 @@
-docker_compose('docker-compose.yml')
+docker_compose('docker-compose-tilt.yml')
 
 custom_build(
   # Image name - must match the image in the docker-compose file
