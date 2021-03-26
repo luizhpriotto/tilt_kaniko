@@ -6,7 +6,7 @@ custom_build(
   #custom command
   './kaniko.sh',
   # Docker context
-  '.',
+  ['.git/logs/HEAD'],
   tag = '${tag}',
   live_update = [
     # Sync local files into the container.

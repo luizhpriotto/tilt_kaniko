@@ -1,4 +1,4 @@
-kubectl run kaniko -n build \
+kubectl run kaniko-$(git rev-parse --abbrev-ref HEAD) -n build \
 --rm --stdin=true \
 --image=gcr.io/kaniko-project/executor:latest --restart=Never \
 --overrides='{
@@ -6,7 +6,7 @@ kubectl run kaniko -n build \
   "spec": {
     "containers": [
       {
-        "name": "kaniko",
+        "name": "kaniko-'$(git rev-parse --abbrev-ref HEAD)'",
         "image": "gcr.io/kaniko-project/executor:latest",
         "stdin": true,
         "stdinOnce": true,
